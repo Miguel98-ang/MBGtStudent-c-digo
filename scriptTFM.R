@@ -1,3 +1,16 @@
+librerias <- c("tidyverse", "readxl","data.table",
+               "knitr", "tables", "kableExtra",
+               "moments", "ggplot2", "LSMRealOptions",
+               "knitr", "tseries", "nortest", "patchwork", "dplyr",
+               "quantmod", "tidyquant", "descr", "summarytools","MASS"
+               ,"ggthemes","zoo","purrr","gridExtra","grid","tidyr","tibble","ggrepel")
+for (pkg in librerias)
+{
+  if (!(pkg %in% installed.packages()))
+    install.packages(pkg, repos = "http://cran.r-project.org")
+  
+  library(pkg, character.only = TRUE)
+}
 # 4. Resultados
 
 # Descargar cada índice individualmente 
