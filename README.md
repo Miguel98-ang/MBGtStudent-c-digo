@@ -1,1 +1,1 @@
-# MBGtStudent-c-digo
+# MBGtStudent-codigo
