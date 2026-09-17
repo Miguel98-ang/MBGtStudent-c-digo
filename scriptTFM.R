@@ -1086,7 +1086,6 @@ n_var_r <- ggplot(eficiencia_df, aes(x = VaR_10d_95_pct, y = Retorno_Medio_pct, 
 
 n_var_r
 
-# 1. Usamos los retornos ya generados de VaR a futuro
 retornos_df <- retornos_futuro_df
 
 graficos_lista1 <- lapply(orden_indices, function(indice_actual) {
@@ -1094,3 +1093,22 @@ graficos_lista1 <- lapply(orden_indices, function(indice_actual) {
   ret_indice <- retornos_df %>% filter(Indice == indice_actual)
   var_95 <- quantile(ret_indice$Retorno, probs = 0.05, na.rm = TRUE)
   
+  ggplot(ret_indice, aes(x = Retorno)) +
+    geom_histogram(bins = 40, fill = "#5DADE2", alpha = 0.9, color = "black") +
+    geom_vline(xintercept = var_95, color = "red", linetype = "dashed", size = 1) +
+    annotate("text", x = var_95, y = 300, label = "95%", color = "red", size = 5, hjust = 1.1) +
+    labs(
+      title = paste("Distribución de retornos", indice_actual),
+      x = "Retorno Simulado",
+      y = "Frecuencia"
+    ) + 
+  coord_cartesian(xlim = c(-0.3, 0.4)) +    
+    theme_minimal(base_size = 13) +
+    theme(
+      plot.title = element_text(size = 18, face = "bold", hjust = 0.5),
+      axis.title = element_text(size = 16),
+      axis.text = element_text(size = 14)
+    )
+})
+
+distribucion_final
